@@ -39,6 +39,10 @@ public class TestSettings {
         new Actions(driver).moveToElement(element).build().perform();
     }
 
+    public void allertAccept(){
+        driver.switchTo().alert().accept();
+    }
+
     @After
     public void close() {
         driver.quit();
