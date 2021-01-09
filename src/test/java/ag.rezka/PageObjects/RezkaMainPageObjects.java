@@ -58,11 +58,38 @@ public class RezkaMainPageObjects extends DriverHolder {
         return driver.findElement(By.xpath("//input[@id='login_password']"));
     }
 
-    public WebElement loginBtn(){
+    public WebElement loginBtn() {
         return driver.findElement(By.xpath("//button[contains(@class,'login')]"));
     }
 
-    public WebElement rulesCheckUp(){
+    public WebElement rulesCheckUp() {
         return driver.findElement(By.xpath("//input[@id='accept-rules']"));
+    }
+
+    public WebElement newTitleInBar() {
+        return driver.findElements(By.xpath("//div[@class='b-content__inline_item-link']")).get(8);
+    }
+
+    public WebElement categoryBar(String catName) {
+        switch (catName) {
+            case "movies":
+                return driver.findElements(By.xpath("//li[contains(@class,'topnav__item')]")).get(0);
+            case "serials":
+                return driver.findElements(By.xpath("//li[contains(@class,'topnav__item')]")).get(1);
+            case "cartoons":
+                return driver.findElements(By.xpath("//li[contains(@class,'topnav__item')]")).get(2);
+            case "anime":
+                return driver.findElements(By.xpath("//li[contains(@class,'topnav__item')]")).get(3);
+
+        }
+        return null;
+    }
+
+    public WebElement thrillers(){
+        return driver.findElement(By.xpath("//a[text()='Боевики']"));
+    }
+
+    public WebElement comedy(){
+        return driver.findElement(By.xpath("//a[text()='Комедии']"));
     }
 }

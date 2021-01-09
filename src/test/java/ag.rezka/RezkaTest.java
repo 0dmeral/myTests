@@ -1,11 +1,14 @@
 package ag.rezka;
 
+import ag.rezka.PageObjects.RezkaCategoryPageObjects;
 import ag.rezka.PageObjects.RezkaMainPageHelper;
 import ag.rezka.PageObjects.RezkaMyBookmarksHelper;
 import ag.rezka.PageObjects.RezkaTitleHelper;
 import ag.rezka.helpers.TestSettings;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class RezkaTest extends TestSettings {
@@ -21,10 +24,7 @@ public class RezkaTest extends TestSettings {
         rezka.emailInput("nikiSss3SDssik");
         rezka.loginInput("katya228");
         rezka.passwordInput("wewewsdssds232323");
-
-
         rezka.confirmRegistration();
-
         rezka.goTo();
 
 
@@ -52,13 +52,11 @@ public class RezkaTest extends TestSettings {
         RezkaMainPageHelper mainPage = new RezkaMainPageHelper(driver);
         waitForElementToBeClickable(mainPage.searchField());
         mainPage.searchInput("mad max");
-
         waitForElementToBeClickable(mainPage.searchList());
         mainPage.searchListPick();
+
         RezkaTitleHelper titlePage = new RezkaTitleHelper(driver);
-
         moveToElement(titlePage.addToBookmarksBtn());
-
         waitForElementToBeClickable(titlePage.addToBookmarksBtn());
         titlePage.addToBookmarksClick();
         moveToElement(titlePage.createFavListBtn());
@@ -69,7 +67,7 @@ public class RezkaTest extends TestSettings {
         waitForElementToBeClickable(titlePage.cfrmCreationOfFLButton());
         moveToElement(titlePage.closeFavListsTitle());
         titlePage.closeFavLists();
-        Assert.assertTrue("not contains",titlePage.addToBookmarksBtn().getText().contains("Находится в закладках"));
+        Assert.assertTrue("not contains", titlePage.addToBookmarksBtn().getText().contains("Находится в закладках"));
 
         mainPage.goTo();
         waitForElementToBeClickable(mainPage.searchField());
@@ -95,17 +93,14 @@ public class RezkaTest extends TestSettings {
         Assert.assertTrue(rezkaMyBookmarks.checkboxTest(1).isSelected());
 
 
-
         waitForElementToBeClickable(rezkaMyBookmarks.deleteTitleBtn());
         rezkaMyBookmarks.deleteTitleBtn().click();
-        driver.switchTo().alert().accept();
+        allertAccept();
         moveToElement(rezkaMyBookmarks.listsStngsBtn());
         rezkaMyBookmarks.listsStngsBtn().click();
         waitForElementToBeDisplayed(rezkaMyBookmarks.confirmListDeleteBtn());
         rezkaMyBookmarks.confirmListDeleteBtn().click();
         Assert.assertTrue(rezkaMyBookmarks.noPresenceOfTitles().isDisplayed());
-
-
 
     }
 
@@ -117,6 +112,34 @@ public class RezkaTest extends TestSettings {
         waitForElementToBeDisplayed(test.signUpEmailField());
         Assert.assertTrue(test.rulesCheckUp().isSelected());
 
+    }
+
+    @Test
+    public void bestOfThrillers() {
+        RezkaMainPageHelper mainPage = new RezkaMainPageHelper(driver);
+        mainPage.goTo();
+        moveToElement(mainPage.categoryBar("movies"));
+        waitForElementToBeDisplayed(mainPage.thrillers());
+        mainPage.thrillers().click();
+
+        RezkaCategoryPageObjects categoryPage = new RezkaCategoryPageObjects(driver);
+        waitForElementToBeDisplayed(categoryPage.popularBtn());
+        categoryPage.popularBtn().click();
+        waitForElementToBeClickable(categoryPage.firstPopularMovie());
+        Assert.assertTrue("false",categoryPage.popularBtn().isEnabled());
+        categoryPage.firstPopularMovie().click();
+
+
+        mainPage.goTo();
+        moveToElement(mainPage.categoryBar("movies"));
+        waitForElementToBeDisplayed(mainPage.comedy());
+        mainPage.comedy().click();
+        waitForElementToBeClickable(categoryPage.popularBtn());
+        Assert.assertFalse("enabled",categoryPage.newestBtn().equals(categoryPage.popularBtn()));
+        categoryPage.popularBtn().click();
+        waitForElementToBeDisplayed(categoryPage.firstPopularMovie());
+
+        categoryPage.firstPopularMovie().click();
 
 
     }
