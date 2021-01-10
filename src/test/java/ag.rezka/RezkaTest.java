@@ -125,20 +125,22 @@ public class RezkaTest extends TestSettings {
         RezkaCategoryPageObjects categoryPage = new RezkaCategoryPageObjects(driver);
         waitForElementToBeDisplayed(categoryPage.popularBtn());
         categoryPage.popularBtn().click();
+        boolean activeProp = categoryPage.popularBtn().getAttribute("className").contains("active");
+        boolean notActiveProp = categoryPage.newestBtn().getAttribute("className").contains("active");
+        Assert.assertTrue("Popular button is not selected",activeProp);
+        Assert.assertFalse("Newest button is selected",notActiveProp);
+
         waitForElementToBeClickable(categoryPage.firstPopularMovie());
         Assert.assertTrue("false",categoryPage.popularBtn().isEnabled());
         categoryPage.firstPopularMovie().click();
-
 
         mainPage.goTo();
         moveToElement(mainPage.categoryBar("movies"));
         waitForElementToBeDisplayed(mainPage.comedy());
         mainPage.comedy().click();
         waitForElementToBeClickable(categoryPage.popularBtn());
-        Assert.assertFalse("enabled",categoryPage.newestBtn().equals(categoryPage.popularBtn()));
         categoryPage.popularBtn().click();
         waitForElementToBeDisplayed(categoryPage.firstPopularMovie());
-
         categoryPage.firstPopularMovie().click();
 
 
