@@ -1,1 +1,2 @@
 # myTests
+src/test/java/
