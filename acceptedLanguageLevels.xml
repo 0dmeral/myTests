@@ -2,6 +2,7 @@
   <component name="AcceptedLanguageLevels">
     <explicitly-accepted>
       <name>JDK_15</name>
+      <name>JDK_15_PREVIEW</name>
     </explicitly-accepted>
   </component>
 </application>
