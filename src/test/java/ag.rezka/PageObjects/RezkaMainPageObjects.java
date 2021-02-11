@@ -80,9 +80,8 @@ public class RezkaMainPageObjects extends DriverHolder {
                 return driver.findElements(By.xpath("//li[contains(@class,'topnav__item')]")).get(2);
             case "anime":
                 return driver.findElements(By.xpath("//li[contains(@class,'topnav__item')]")).get(3);
-
+            default: return null;
         }
-        return null;
     }
 
     public WebElement thrillers(){

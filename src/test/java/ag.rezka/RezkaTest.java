@@ -7,12 +7,8 @@ import ag.rezka.PageObjects.RezkaTitleHelper;
 import ag.rezka.helpers.TestSettings;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 public class RezkaTest extends TestSettings {
-
 
     @Test
     public void signUp() {
@@ -68,6 +64,7 @@ public class RezkaTest extends TestSettings {
         moveToElement(titlePage.closeFavListsTitle());
         titlePage.closeFavLists();
         Assert.assertTrue("not contains", titlePage.addToBookmarksBtn().getText().contains("Находится в закладках"));
+        
 
         mainPage.goTo();
         waitForElementToBeClickable(mainPage.searchField());
@@ -92,15 +89,14 @@ public class RezkaTest extends TestSettings {
         Assert.assertTrue(rezkaMyBookmarks.checkboxTest(0).isSelected());
         Assert.assertTrue(rezkaMyBookmarks.checkboxTest(1).isSelected());
 
-
         waitForElementToBeClickable(rezkaMyBookmarks.deleteTitleBtn());
         rezkaMyBookmarks.deleteTitleBtn().click();
-        allertAccept();
+        alertAccept();
         moveToElement(rezkaMyBookmarks.listsStngsBtn());
         rezkaMyBookmarks.listsStngsBtn().click();
         waitForElementToBeDisplayed(rezkaMyBookmarks.confirmListDeleteBtn());
         rezkaMyBookmarks.confirmListDeleteBtn().click();
-        Assert.assertTrue(rezkaMyBookmarks.noPresenceOfTitles().isDisplayed());
+        Assert.assertTrue("Titles present", rezkaMyBookmarks.noPresenceOfTitles().isDisplayed());
 
     }
 
@@ -127,11 +123,12 @@ public class RezkaTest extends TestSettings {
         categoryPage.popularBtn().click();
         boolean activeProp = categoryPage.popularBtn().getAttribute("className").contains("active");
         boolean notActiveProp = categoryPage.newestBtn().getAttribute("className").contains("active");
-        Assert.assertTrue("Popular button is not selected",activeProp);
-        Assert.assertFalse("Newest button is selected",notActiveProp);
+        Assert.assertTrue("Popular button is not selected", activeProp);
+        Assert.assertFalse("Newest button is selected", notActiveProp);
+
 
         waitForElementToBeClickable(categoryPage.firstPopularMovie());
-        Assert.assertTrue("false",categoryPage.popularBtn().isEnabled());
+        Assert.assertTrue("false", categoryPage.popularBtn().isEnabled());
         categoryPage.firstPopularMovie().click();
 
         mainPage.goTo();
@@ -142,7 +139,6 @@ public class RezkaTest extends TestSettings {
         categoryPage.popularBtn().click();
         waitForElementToBeDisplayed(categoryPage.firstPopularMovie());
         categoryPage.firstPopularMovie().click();
-
 
     }
 }
