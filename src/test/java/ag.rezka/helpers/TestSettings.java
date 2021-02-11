@@ -35,11 +35,11 @@ public class TestSettings {
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void moveToElement(WebElement element){
+    public void moveToElement(WebElement element) {
         new Actions(driver).moveToElement(element).build().perform();
     }
 
-    public void allertAccept(){
+    public void alertAccept() {
         driver.switchTo().alert().accept();
     }
 
